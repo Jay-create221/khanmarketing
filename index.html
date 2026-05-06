@@ -23,6 +23,10 @@
         .quiz-item p { margin: 0 0 10px 0; font-weight: 500; }
         .options label { display: block; padding: 8px; cursor: pointer; }
         
+        /* 채점하기 버튼 스타일 추가 */
+        .grade-btn { width: 100%; padding: 12px; background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+        .grade-btn:hover { background: var(--primary-color); color: #fff; }
+
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
         .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
@@ -76,6 +80,8 @@
                     <label><input type="radio" name="q3" value="3"> ③ 6일</label>
                 </div>
             </div>
+            <!-- 채점하기 버튼 추가 -->
+            <button type="button" class="grade-btn" onclick="gradeQuiz()">결과 확인</button>
         </div>
 
         <div class="section">
@@ -122,6 +128,33 @@
 </div>
 
 <script>
+// 새로 추가된 채점 기능
+function gradeQuiz() {
+    const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+    const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+    const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+
+    if (!q1 || !q2 || !q3) {
+        alert("모든 퀴즈 항목을 선택한 후 채점해주세요.");
+        return;
+    }
+
+    // 각 질문별 정답 확인
+    let resultMessage = "[ 퀴즈 채점 결과 ]\n\n";
+    resultMessage += "Q1. " + (q1 === "3" ? "정답 ⭕" : "오답 ❌") + "\n";
+    resultMessage += "Q2. " + (q2 === "2" ? "정답 ⭕" : "오답 ❌") + "\n";
+    resultMessage += "Q3. " + (q3 === "2" ? "정답 ⭕" : "오답 ❌") + "\n\n";
+
+    if (q1 === "3" && q2 === "2" && q3 === "2") {
+        resultMessage += "축하합니다! 모든 정답을 맞추셨습니다.\n이제 아래 정보를 입력하고 이벤트에 응모해주세요.";
+    } else {
+        resultMessage += "오답이 포함되어 있습니다. 다시 확인해주세요.";
+    }
+
+    alert(resultMessage);
+}
+
+// 기존 응모 로직
 function validateQuiz() {
     const q1 = document.querySelector('input[name="q1"]:checked')?.value;
     const q2 = document.querySelector('input[name="q2"]:checked')?.value;
@@ -137,10 +170,7 @@ function validateQuiz() {
     }
 
     if (q1 === "3" && q2 === "2" && q3 === "2") {
-        // 데이터를 객체로 만듭니다
         const formData = { userName, phone, address, subscriber, q1, q2, q3 };
-
-        // 2단계에서 복사한 웹 앱 URL을 여기에 넣으세요
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyC5yHVWJqFhDA7r8WVDOtoNxAMrPhCSd1cR94uyG5LgNBjlyrC4zWa_uLjCSE_WsI64w/exec';
 
         fetch(scriptURL, {
@@ -154,7 +184,7 @@ function validateQuiz() {
         .catch(error => alert("오류가 발생했습니다: " + error.message));
         
     } else {
-        alert("오답이 포함되어 있습니다. 다시 확인 후 응모해주세요.");
+        alert("오답이 포함되어 있습니다. '채점하기' 버튼을 눌러 틀린 문제를 확인해보세요.");
     }
 }
 </script>
