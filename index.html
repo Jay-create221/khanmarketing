@@ -32,6 +32,10 @@
         
         .agreement { font-size: 12px; color: #666; background: #eee; padding: 10px; border-radius: 5px; height: 80px; overflow-y: scroll; margin-bottom: 10px; }
         
+        /* 새로 추가된 안내 문구 스타일 */
+        .submit-warning { font-size: 13px; color: var(--accent-color); text-align: center; margin-bottom: 12px; word-break: keep-all; }
+        .submit-warning strong { font-weight: bold; text-decoration: underline; }
+
         .submit-btn { width: 100%; padding: 15px; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
         .submit-btn:hover { background: #002244; }
         
@@ -114,10 +118,15 @@
                 2. 수집 목적: 이벤트 당첨자 확인 및 경품(티켓) 배송<br>
                 3. 보유 기간: 이벤트 종료 및 경품 배송 완료 후 3개월 이내 파기
             </div>
-            <!-- id="agreement" 속성 추가 -->
             <label style="font-size: 14px;"><input type="checkbox" id="agreement" required> 위 사항에 동의합니다. (필수)</label>
         </div>
 
+        <!-- 안내 문구 추가 영역 -->
+        <div class="submit-warning">
+            응답하기 버튼을 <strong>한 번만</strong> 누르고 기다려주세요.<br>
+            응답이 입력될 때까지 다소 시간이 소요될 수 있습니다.
+        </div>
+        
         <button type="button" class="submit-btn" onclick="validateQuiz()">이벤트 응모하기</button>
     </form>
 
@@ -152,11 +161,10 @@ function gradeQuiz() {
 }
 
 function validateQuiz() {
-    // 1. 개인정보 동의 체크 여부 확인 로직 추가
     const isAgreementChecked = document.getElementById('agreement').checked;
     if (!isAgreementChecked) {
         alert("개인정보 수집 및 이용에 동의해야 이벤트에 응모할 수 있습니다.");
-        return; // 동의하지 않았으므로 함수 실행 중단
+        return; 
     }
 
     const q1 = document.querySelector('input[name="q1"]:checked')?.value;
