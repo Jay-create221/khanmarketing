@@ -23,7 +23,7 @@
         body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); margin: 0; padding: 20px; color: #333; }
         .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         .header { text-align: center; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 30px; }
-        .header h1 { color: var(--primary-color); font-size: 24px; margin: 0; }
+        .header h1 { color: var(--primary-color); font-size: 20px; margin: 0; }
         .header p { color: #666; margin-top: 10px; }
         
         .section { margin-bottom: 30px; }
@@ -199,7 +199,7 @@ function validateQuiz() {
             body: JSON.stringify(formData)
         })
         .then(response => {
-            alert("정답입니다! 응모가 성공적으로 완료되었습니다.");
+            alert("응모가 성공적으로 완료되었습니다.");
             document.getElementById("eventForm").reset();
         })
         .catch(error => alert("오류가 발생했습니다: " + error.message));
