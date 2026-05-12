@@ -118,12 +118,18 @@
                 <input type="text" name="address" required placeholder="입력한 주소가 잘못되었을 경우 경품 발송이 불가하니, 회원 정보를 꼭 확인해 주세요. ">
             </div>
             <div class="form-group">
-    <label>구독 여부</label>
-    <div style="display: flex; gap: 15px; margin-top: 8px; margin-bottom: 8px;">
-        <label style="cursor: pointer; font-size: 15px;"><input type="radio" name="subscriber" value="paper"> 구독 중</label>
-        <label style="cursor: pointer; font-size: 15px;"><input type="radio" name="subscriber" value="none"> 구독 안함</label>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <label style="margin-bottom: 0;">구독 여부</label>
+        <div style="display: flex; gap: 15px;">
+            <label style="margin-bottom: 0; cursor: pointer; font-weight: normal; font-size: 15px; display: flex; align-items: center;">
+                <input type="radio" name="subscriber" value="paper" style="width: auto; margin: 0 5px 0 0;"> 구독 중
+            </label>
+            <label style="margin-bottom: 0; cursor: pointer; font-weight: normal; font-size: 15px; display: flex; align-items: center;">
+                <input type="radio" name="subscriber" value="none" style="width: auto; margin: 0 5px 0 0;"> 구독 안함
+            </label>
+        </div>
     </div>
-    <div class="sub-text">※ 구독자가 아닌 경우 추첨에서 제외될 수 있습니다.</div>
+    <div class="sub-text" style="margin-top: 8px;">※ 구독자가 아닌 경우 추첨에서 제외될 수 있습니다.</div>
 </div>
         </div>
 
@@ -190,7 +196,7 @@ function validateQuiz() {
     const userName = document.querySelector('input[name="userName"]').value;
     const phone = document.querySelector('input[name="phone"]').value;
     const address = document.querySelector('input[name="address"]').value;
-    const subscriber = document.querySelector('select[name="subscriber"]').value;
+    const subscriber = document.querySelector('input[name="subscriber"]:checked')?.value;
 
     if (!q1 || !q2 || !q3 || !userName || !phone || !address) {
         alert("모든 항목을 입력하고 퀴즈를 풀어주세요.");
