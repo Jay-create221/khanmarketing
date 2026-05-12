@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-09CD4S35L1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-09CD4S35L1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -20,37 +19,44 @@
             --accent-color: #e60012; /* 강조 레드 */
             --bg-color: #f4f7f9;
         }
-        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); margin: 0; padding: 15px; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        
+        /* 제목 부분 스타일 수정 */
         .header { text-align: center; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 30px; }
-        .header h1 { color: var(--primary-color); font-size: 20px; margin: 0; line-height: 1.4; }
-        .header p { color: #666; margin-top: 10px; line-height: 1.5; }
+        .header h1 { 
+            color: var(--primary-color); 
+            font-size: 21px; /* 모바일 가독성을 고려한 크기 */
+            margin: 0; 
+            line-height: 1.4; 
+            word-break: keep-all; 
+        }
+        .header p { color: #666; margin-top: 15px; line-height: 1.6; font-size: 14px; word-break: keep-all; }
         
         .section { margin-bottom: 30px; }
         .section-title { font-weight: bold; font-size: 16px; margin-bottom: 15px; display: block; color: var(--primary-color); }
         
         .quiz-item { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
-        .quiz-item p { margin: 0 0 10px 0; font-weight: 500; }
-        .options label { display: block; padding: 8px; cursor: pointer; }
+        .quiz-item p { margin: 0 0 10px 0; font-weight: 500; font-size: 15px; }
+        .options label { display: block; padding: 8px; cursor: pointer; font-size: 15px; }
         
         .grade-btn { width: 100%; padding: 12px; background: #fff; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
         .grade-btn:hover { background: var(--primary-color); color: #fff; }
 
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .sub-text { font-size: 12px; color: var(--accent-color); margin-top: 5px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; font-size: 15px; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
+        .sub-text { font-size: 12px; color: var(--accent-color); margin-top: 5px; font-weight: 500; }
         
         .agreement { font-size: 12px; color: #666; background: #eee; padding: 10px; border-radius: 5px; height: 100px; overflow-y: scroll; margin-bottom: 10px; line-height: 1.6; }
         
-        /* 새로 추가된 안내 문구 스타일 */
-        .submit-warning { font-size: 15px; color: var(--accent-color); text-align: center; margin-bottom: 12px; word-break: keep-all; }
+        .submit-warning { font-size: 14px; color: var(--accent-color); text-align: center; margin-bottom: 12px; word-break: keep-all; line-height: 1.5; }
         .submit-warning strong { font-weight: bold; text-decoration: underline; }
 
         .submit-btn { width: 100%; padding: 15px; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
         .submit-btn:hover { background: #002244; }
         
-        .footer { text-align: center; font-size: 12px; color: #999; margin-top: 20px; }
+        .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
     </style>
     
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -63,7 +69,7 @@
 
 <div class="container">
     <div class="header">
-        <h1>경향신문 창간 80주년 기념<br>&lt;페르난도 보테로: 형태의 미학&gt; 전시 구독자 초대 이벤트</h1>
+        <h1>경향신문 창간 80주년 기념<br>&lt;페르난도 보테로: 형태의 미학&gt; 전시<br>구독자 초대 이벤트</h1>
         <p>이벤트에 참여하신 분 중 5월부터 7월까지 3개월간 매월 50분을 추첨하여 당첨되신 분께 1인 2매 초대권을 보내드립니다. 단, 기당첨되신 분께 중복으로 지급되지 않습니다.</p>
     </div>
 
@@ -134,7 +140,6 @@
             <label style="font-size: 14px;"><input type="checkbox" id="agreement" required> 위 사항에 동의합니다. (필수)</label>
         </div>
 
-        <!-- 안내 문구 추가 영역 -->
         <div class="submit-warning">
             응모하기 버튼을 <strong>한 번만</strong> 누르고 기다려주세요.<br>
             응답이 입력될 때까지 다소 시간이 소요될 수 있습니다.
@@ -193,7 +198,6 @@ function validateQuiz() {
         return;
     }
 
-    // 변경된 정답 반영 (q3 === "1")
     if (q1 === "3" && q2 === "2" && q3 === "1") {
         const formData = { userName, phone, address, subscriber, q1, q2, q3 };
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyC5yHVWJqFhDA7r8WVDOtoNxAMrPhCSd1cR94uyG5LgNBjlyrC4zWa_uLjCSE_WsI64w/exec';
