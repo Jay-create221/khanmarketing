@@ -16,18 +16,17 @@
     <title>경향신문 창간 80주년 기념 &lt;페르난도 보테로: 형태의 미학&gt; 전시 구독자 초대 이벤트</title>
     <style>
         :root {
-            --primary-color: #003366; /* 경향신문 톤의 네이비 */
-            --accent-color: #e60012; /* 강조 레드 */
+            --primary-color: #003366;
+            --accent-color: #e60012;
             --bg-color: #f4f7f9;
         }
         body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); margin: 0; padding: 15px; color: #333; }
         .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         
-        /* 제목 부분 스타일 수정 - 전체 폰트 크기를 작게 통일 */
         .header { text-align: center; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 30px; }
         .header h1 { 
             color: var(--primary-color); 
-            font-size: 16px; /* 폰트 크기 통일 */
+            font-size: 16px; 
             margin: 0; 
             line-height: 1.5; 
             word-break: keep-all; 
@@ -57,7 +56,6 @@
         .submit-btn { width: 100%; padding: 15px; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
         .submit-btn:hover { background: #002244; }
         
-        /* 하단 유의사항 스타일 */
         .notice-bottom { font-size: 13px; color: #000; text-align: center; margin-top: 20px; line-height: 1.6; word-break: keep-all; }
 
         .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
@@ -73,7 +71,6 @@
 
 <div class="container">
     <div class="header">
-        <!-- 폰트 크기 통일 및 모바일 줄바꿈 방지(nowrap) 처리 유지 -->
         <h1>경향신문 창간 80주년 기념<br>
             <span style="white-space: nowrap; letter-spacing: -0.5px;">&lt;페르난도 보테로: 형태의 미학&gt; 전시</span><br>
             구독자 초대 이벤트
@@ -119,7 +116,8 @@
             </div>
             <div class="form-group">
                 <label>연락처</label>
-                <input type="tel" name="phone" required placeholder="010-0000-0000">
+                <!-- pattern 속성을 추가하여 모바일 키보드 등의 힌트를 줄 수도 있습니다 -->
+                <input type="tel" name="phone" required placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
             </div>
             <div class="form-group">
                 <label>주소</label>
@@ -212,6 +210,13 @@ function validateQuiz() {
 
     if (!q1 || !q2 || !q3 || !userName || !phone || !address || !subscriber) {
         alert("모든 항목을 입력하고 퀴즈를 풀어주세요.");
+        return;
+    }
+
+    // 연락처 형식 검사 (010-0000-0000)
+    const phoneRegex = /^010-\d{4}-\d{4}$/;
+    if (!phoneRegex.test(phone)) {
+        alert("연락처를 010-0000-0000 형식으로 입력해주세요. (하이픈 '-' 포함)");
         return;
     }
 
