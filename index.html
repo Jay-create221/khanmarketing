@@ -11,6 +11,9 @@
   gtag('config', 'G-09CD4S35L1');
 </script>
 
+    <!-- 카카오 우편번호 API -->
+    <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>경향신문 창간 80주년 기념 &lt;페르난도 보테로: 형태의 미학&gt; 전시 구독자 초대 이벤트</title>
@@ -92,9 +95,9 @@
             <div class="quiz-item">
                 <p>Q2. 경향신문에서 발행하는 시사주간지 이름은?</p>
                 <div class="options">
-                    <label><input type="radio" name="q2" value="1"> ① 시사IN</label>
+                    <label><input type="radio" name="q2" value="1"> ① 시사경향</label>
                     <label><input type="radio" name="q2" value="2"> ② 주간경향</label>
-                    <label><input type="radio" name="q2" value="3"> ③ 한겨레21</label>
+                    <label><input type="radio" name="q2" value="3"> ③ 경향매거진</label>
                 </div>
             </div>
             <div class="quiz-item">
@@ -116,13 +119,21 @@
             </div>
             <div class="form-group">
                 <label>연락처</label>
-                <!-- pattern 속성을 추가하여 모바일 키보드 등의 힌트를 줄 수도 있습니다 -->
                 <input type="tel" name="phone" required placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
             </div>
+            
+            <!-- 주소 입력 (우편번호 API 적용) -->
             <div class="form-group">
                 <label>주소</label>
-                <input type="text" name="address" required placeholder="입력한 주소가 잘못되었을 시 경품 발송이 불가하니, 주소를 꼭 확인해 주세요.">
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <input type="text" id="postcode" placeholder="우편번호" readonly style="width: 60%; background-color: #f9f9f9; cursor: pointer;" onclick="execDaumPostcode()">
+                    <button type="button" onclick="execDaumPostcode()" style="width: 40%; padding: 12px; background: #555; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">우편번호 찾기</button>
+                </div>
+                <input type="text" id="roadAddress" placeholder="기본 주소 (도로명/지번)" readonly style="margin-bottom: 8px; background-color: #f9f9f9; cursor: pointer;" onclick="execDaumPostcode()">
+                <input type="text" id="detailAddress" required placeholder="상세 주소를 입력해주세요">
+                <div class="sub-text" style="color: #666;">※ 입력한 주소가 잘못되었을 시 경품 발송이 불가하니, 꼭 확인해 주세요.</div>
             </div>
+
             <div class="form-group">
                 <div style="display: flex; align-items: center; white-space: nowrap; gap: 12px; margin-top: 5px;">
                     <label style="margin-bottom: 0;">경향신문 구독 여부</label>
@@ -169,6 +180,29 @@
 </div>
 
 <script>
+// 카카오 우편번호 API 실행 함수
+function execDaumPostcode() {
+    new kakao.Postcode({
+        oncomplete: function(data) {
+            var addr = ''; // 주소 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('postcode').value = data.zonecode;
+            document.getElementById('roadAddress').value = addr;
+            
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('detailAddress').focus();
+        }
+    }).open();
+}
+
 function gradeQuiz() {
     const q1 = document.querySelector('input[name="q1"]:checked')?.value;
     const q2 = document.querySelector('input[name="q2"]:checked')?.value;
@@ -205,10 +239,14 @@ function validateQuiz() {
     const q3 = document.querySelector('input[name="q3"]:checked')?.value;
     const userName = document.querySelector('input[name="userName"]').value;
     const phone = document.querySelector('input[name="phone"]').value;
-    const address = document.querySelector('input[name="address"]').value;
     const subscriber = document.querySelector('input[name="subscriber"]:checked')?.value;
+    
+    // 주소 정보 가져오기
+    const postcode = document.getElementById('postcode').value;
+    const roadAddress = document.getElementById('roadAddress').value;
+    const detailAddress = document.getElementById('detailAddress').value;
 
-    if (!q1 || !q2 || !q3 || !userName || !phone || !address || !subscriber) {
+    if (!q1 || !q2 || !q3 || !userName || !phone || !postcode || !roadAddress || !detailAddress || !subscriber) {
         alert("모든 항목을 입력하고 퀴즈를 풀어주세요.");
         return;
     }
@@ -221,7 +259,9 @@ function validateQuiz() {
     }
 
     if (q1 === "3" && q2 === "2" && q3 === "1") {
-        const formData = { userName, phone, address, subscriber, q1, q2, q3 };
+        // 백엔드로 보낼 때 주소를 하나의 문자열로 합쳐서 전송
+        const fullAddress = `[${postcode}] ${roadAddress} ${detailAddress}`;
+        const formData = { userName, phone, address: fullAddress, subscriber, q1, q2, q3 };
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyC5yHVWJqFhDA7r8WVDOtoNxAMrPhCSd1cR94uyG5LgNBjlyrC4zWa_uLjCSE_WsI64w/exec';
 
         fetch(scriptURL, {
