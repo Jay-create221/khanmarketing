@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-09CD4S35L1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-09CD4S35L1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -11,7 +10,6 @@
   gtag('config', 'G-09CD4S35L1');
 </script>
 
-    <!-- 카카오 우편번호 API -->
     <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <meta charset="UTF-8">
@@ -59,7 +57,7 @@
         .submit-btn { width: 100%; padding: 15px; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
         .submit-btn:hover { background: #002244; }
         
-        .notice-bottom { font-size: 13px; color: #000; text-align: center; margin-top: 20px; line-height: 1.6; word-break: keep-all; }
+        .notice-bottom { font-size: 13px; color: #000; text-align: center; margin-top: 10px; margin-bottom: 20px; line-height: 1.6; word-break: keep-all; background: #f9f9f9; padding: 15px; border-radius: 8px; }
 
         .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
     </style>
@@ -78,7 +76,8 @@
             <span style="white-space: nowrap; letter-spacing: -0.5px;">&lt;페르난도 보테로: 형태의 미학&gt; 전시</span><br>
             구독자 초대 이벤트
         </h1>
-        <p>이벤트에 참여하신 분 중 5월부터 7월까지 3개월간 매월 50분을 추첨하여 당첨되신 분께 1인 2매 초대권을 보내드립니다. 단, 기당첨되신 분께 중복으로 지급되지 않습니다.</p>
+        <p>이벤트에 참여하신 분 중 매월 150명을 추첨하여 당첨되신 분께 초대권(1인 2매)을 보내드립니다. 단, 중복 당첨자는 제외됩니다.<br><br>
+        <strong>※ 응모기간: 2026년 6월 8일 ~ 7월 25일</strong></p>
     </div>
 
     <form id="eventForm">
@@ -122,7 +121,6 @@
                 <input type="tel" name="phone" required placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
             </div>
             
-            <!-- 주소 입력 (우편번호 API 적용) -->
             <div class="form-group">
                 <label>주소</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 8px;">
@@ -157,7 +155,16 @@
                 3. 보유 기간 : 수집 및 이용 목적 달성 후 즉시 파기<br>
                 4. 동의를 거부하실 수 있으나, 동의하지 않을 경우 경품 지급이 불가합니다.
             </div>
-            <label style="font-size: 14px;"><input type="checkbox" id="agreement" required> 위 사항에 동의합니다. (필수)</label>
+            <label style="font-size: 14px; cursor: pointer;"><input type="checkbox" id="agreement" required> 위 사항에 동의합니다. (필수)</label>
+        </div>
+
+        <div class="notice-bottom">
+            <strong style="color: var(--accent-color);">※ 꼭 확인해 주세요!</strong><br>
+            · 우편사정에 따른 경품 배송 지연 또는 분실에 대해 당사가 책임지지 않습니다.<br>
+            · 발송 후 잘못된 개인정보로 인한 미배송이나 오배송은 재발송이 불가합니다.<br>
+            <label style="display: inline-block; margin-top: 15px; font-size: 15px; cursor: pointer; font-weight: bold;">
+                <input type="checkbox" id="noticeCheck" required> 네, 확인하였습니다. (필수)
+            </label>
         </div>
 
         <div class="submit-warning">
@@ -167,11 +174,6 @@
         
         <button type="button" class="submit-btn" onclick="validateQuiz()">응모하기</button>
         
-        <div class="notice-bottom">
-            ※꼭 확인해 주세요!<br>
-            ·우편사정에 따른 경품 배송 지연 또는 분실에 대해 당사가 책임지지 않습니다.<br>
-            ·발송 후 잘못된 개인정보로 인한 미배송이나 오배송은 재발송이 불가합니다.
-        </div>
     </form>
 
     <div class="footer">
@@ -232,6 +234,13 @@ function validateQuiz() {
     if (!isAgreementChecked) {
         alert("개인정보 수집 및 이용에 동의해야 이벤트에 응모할 수 있습니다.");
         return; 
+    }
+
+    // 유의사항 체크 여부 검증 추가
+    const isNoticeChecked = document.getElementById('noticeCheck').checked;
+    if (!isNoticeChecked) {
+        alert("유의사항을 확인하신 후 '네, 확인하였습니다'에 체크해 주세요.");
+        return;
     }
 
     const q1 = document.querySelector('input[name="q1"]:checked')?.value;
