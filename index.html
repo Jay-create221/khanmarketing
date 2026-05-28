@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-09CD4S35L1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-09CD4S35L1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -11,7 +10,6 @@
   gtag('config', 'G-09CD4S35L1');
 </script>
 
-    <!-- 카카오 우편번호 API -->
     <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <meta charset="UTF-8">
@@ -39,6 +37,13 @@
         .section { margin-bottom: 30px; }
         .section-title { font-weight: bold; font-size: 16px; margin-bottom: 15px; display: block; color: var(--primary-color); }
         
+        /* 추가된 구분선 스타일 */
+        .section-divider {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 10px 0 40px 0; /* 위아래 여백을 넉넉하게 설정 */
+        }
+
         .quiz-item { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
         .quiz-item p { margin: 0 0 10px 0; font-weight: 500; font-size: 15px; }
         .options label { display: block; padding: 8px; cursor: pointer; font-size: 15px; }
@@ -112,6 +117,8 @@
             <button type="button" class="grade-btn" onclick="gradeQuiz()">결과 확인 및 채점하기</button>
         </div>
 
+        <hr class="section-divider">
+
         <div class="section">
             <span class="section-title">STEP 2. 응모자 정보 입력</span>
             <div class="form-group">
@@ -123,7 +130,6 @@
                 <input type="tel" name="phone" required placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
             </div>
             
-            <!-- 주소 입력 (우편번호 API 적용) -->
             <div class="form-group">
                 <label>주소</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 8px;">
@@ -148,6 +154,8 @@
                 <div class="sub-text" style="margin-top: 8px; color: #666;">※ 구독자가 아닌 경우 추첨에서 제외될 수 있습니다.</div>
             </div>
         </div>
+
+        <hr class="section-divider">
 
         <div class="section">
             <span class="section-title">STEP 3. 개인정보 활용 동의</span>
